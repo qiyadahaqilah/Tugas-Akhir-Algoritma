@@ -4,3 +4,98 @@ int main(){
 }
 // Nama : Qiyadah Aqilah
 // NIM  : 12250523614
+
+#include <stdio.h>
+#include <string.h>
+
+float saldo = 20567000.0;
+const char PIN[] = "2424"; 
+char enteredPIN[5]; 
+
+void cekSaldo() {
+    printf("Saldo Anda saat ini: Rp %.2f\n", saldo);
+}
+
+void tarikTunai() {
+    float jumlah;
+    printf("Masukkan jumlah yang ingin Anda tarik: Rp ");
+    scanf("%f", &jumlah);
+    
+    if (jumlah <= saldo) {
+        saldo -= jumlah;
+        printf("Anda telah menarik Rp %.2f\n", jumlah);
+        printf("Saldo Anda saat ini: Rp %.2f\n", saldo);
+    } else {
+        printf("Saldo tidak mencukupi!\n");
+    }
+}
+
+void setorTunai() {
+    float jumlah;
+    printf("Masukkan jumlah yang ingin Anda setor: Rp ");
+    scanf("%f", &jumlah);
+    
+    saldo += jumlah;
+    printf("Anda telah menyetor Rp %.2f\n", jumlah);
+    printf("Saldo Anda saat ini: Rp %.2f\n", saldo);
+}
+
+int verifikasiPIN() {
+    printf("Masukkan PIN Anda: ");
+    scanf("%4s", enteredPIN); 
+
+    if (strcmp(PIN, enteredPIN) == 0) {
+        return 1; 
+    } else {
+        return 0; 
+    }
+}
+
+int main() {
+    int pilihan;
+    int kesempatan = 3; 
+
+    while (kesempatan > 0) {
+        if (verifikasiPIN()) {
+            printf("PIN benar. Selamat datang!\n");
+            break;
+        } else {
+            kesempatan--;
+            printf("PIN salah. Anda memiliki %d kesempatan lagi.\n", kesempatan);
+        }
+
+        if (kesempatan == 0) {
+            printf("Kesempatan memasukkan PIN telah habis. Kartu ATM Anda diblokir.\n");
+            return 1;
+        }
+    }
+
+    while(1) {
+        printf("\n====== ATM Menu ======\n");
+        printf("1. Cek Saldo\n");
+        printf("2. Tarik Tunai\n");
+        printf("3. Setor Tunai\n");
+        printf("4. Keluar\n");
+        printf("Pilih menu: ");
+        scanf("%d", &pilihan);
+        
+        switch(pilihan) {
+            case 1:
+                cekSaldo();
+                break;
+            case 2:
+                tarikTunai();
+                break;
+            case 3:
+                setorTunai();
+                break;
+            case 4:
+                printf("Terima kasih telah menggunakan ATM kami.\n");
+                return 0;
+            default:
+                printf("Pilihan tidak valid! Silakan coba lagi.\n");
+        }
+    }
+    
+    return 0;
+}
