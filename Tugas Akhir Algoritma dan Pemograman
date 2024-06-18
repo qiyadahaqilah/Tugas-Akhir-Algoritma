@@ -1,0 +1,6 @@
+#include <stdio.h>
+int main(){
+    printf("Panduan Tugas Akhir Algoritma dan Pemograman");
+}
+// Nama : Qiyadah Aqilah
+// NIM  : 12250523614
